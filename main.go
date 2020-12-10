@@ -15,7 +15,7 @@ import (
 func main() {
 	PythonPath := os.Args[1]
 
-	testsCount := 300
+	testsCount := 269
 	wp := workerpool.New(runtime.NumCPU() - 1)
 
 	for i := 1; i <= testsCount; i++ {
