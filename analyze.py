@@ -67,4 +67,32 @@ for system in systems:
     diffs.append((mobo_cpu - bnv2_4_cpu) / (bnv2_4_cpu))
     
 print(len(mobo_is_cheaper),'caces mobo is better', '( total is ', len(systems),')', 'for rest didnt find anything')
-print('on average MOBO uses',str(int(np.round(np.mean(diffs) * 100))) + '%','more CPU shares to meet the SLAs')
+print('on average MOBO uses',str(int(np.round(np.mean(diffs) * 100))) + '%','more than BNV2-4.0 CPU shares to meet the SLAs')
+
+df_bnv1_4 = df[df.approach == 'BNV1-4.0']
+mobo_is_cheaper = []
+diffs = []
+systems = df_mobo.system.values
+for system in systems:
+    mobo_cpu = df_mobo[df_mobo.system == system].cpu.values[0]
+    bnv1_4_cpu = df_bnv1_4[df_bnv1_4.system == system].max_total_core.values[0]
+    if mobo_cpu < bnv1_4_cpu:
+        mobo_is_cheaper.append(system)
+    diffs.append((mobo_cpu - bnv1_4_cpu) / (bnv1_4_cpu))
+
+print(len(mobo_is_cheaper),'caces mobo is better', '( total is ', len(systems),')', 'for rest didnt find anything')
+print('on average MOBO uses',str(int(np.round(np.mean(diffs) * 100))) + '%','more than BNV1-4.0 CPU shares to meet the SLAs')
+
+df_bnv1_4 = df[df.approach == 'BNV1-2.0']
+mobo_is_cheaper = []
+diffs = []
+systems = df_mobo.system.values
+for system in systems:
+    mobo_cpu = df_mobo[df_mobo.system == system].cpu.values[0]
+    bnv1_4_cpu = df_bnv1_4[df_bnv1_4.system == system].max_total_core.values[0]
+    if mobo_cpu < bnv1_4_cpu:
+        mobo_is_cheaper.append(system)
+    diffs.append((mobo_cpu - bnv1_4_cpu) / (bnv1_4_cpu))
+
+print(len(mobo_is_cheaper),'caces mobo is better', '( total is ', len(systems),')', 'for rest didnt find anything')
+print('on average MOBO uses',str(int(np.round(np.mean(diffs) * 100))) + '%','more than BNV1-2.0 CPU shares to meet the SLAs')
